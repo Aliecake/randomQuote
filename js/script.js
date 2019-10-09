@@ -1,6 +1,7 @@
 //Lauren Eggers TT Project 1, unit 1
 
 const quoteBox = document.getElementById('loadQuote');
+const specialSpan = document.getElementById('special');
 
 const quotes =[
   {
@@ -24,7 +25,8 @@ const quotes =[
     quote: `Life is a game, where the player must appear ridiculous.`,
     source: `Christmas at Downton Abbey`,
     citation: `<a href="https://www.imdb.com/title/tt2013429/characters/nm0001749">IMDB</a>`,
-    year: 2011
+    year: 2011,
+    special: true
   },
   {
     quote: `I knew this family was approaching disillusion, I wasn’t aware that illusion was already upon us.`,
@@ -70,6 +72,12 @@ function printQuote() {
       html += `
         <span class="citation"></span>
       </p>`;
+    }
+
+    if (randomQuote.special){
+      specialSpan.innerHTML = `<img src="./images/christmas-tree.png" alt="XMAS tree">`;
+    } else {
+      specialSpan.innerHTML = ''
     }
     document.getElementById('quote-box').innerHTML = html;
     //generates random background colors for body and button
