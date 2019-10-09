@@ -73,7 +73,7 @@ body {
 
 #loadQuote {
   width: 12em;
-  position: absolute;
+  position: fixed;
   margin: 20px;
   left: 50%;
   bottom: 150px;

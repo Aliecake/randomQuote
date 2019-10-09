@@ -62,21 +62,13 @@ function htmlBuilder(randomQuote) {
       <span class="citation">${randomQuote.citation}</span>
       <span class="year">${randomQuote.year}</span>
       </p>`;
-  } else if(!randomQuote.citation){
-    html += `
-    <span class="year"></span>
-    </p>`;
   } else {
-    html += `
-      <span class="citation"></span>
-    </p>`;
+    randomQuote.citation? html += `<span class="citation">${randomQuote.citation}</span></p>` : html +=``;
+    randomQuote.year? html += `<span class="year">${randomQuote.year}</span></p>` : html += ``;
   }
   //Easter egg
-  if (randomQuote.special){
-    specialSpan.innerHTML = `<img src="./images/christmas-tree.png" alt="XMAS tree">`;
-  } else {
-    specialSpan.innerHTML = '';
-  }
+  randomQuote.special? specialSpan.innerHTML = `<img src="./images/christmas-tree.png" alt="XMAS tree">` : specialSpan.innerHTML = ``;
+  html += `</p>`;
   return html;
 }
 
