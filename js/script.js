@@ -2,6 +2,7 @@
 
 const quoteBox = document.getElementById('loadQuote');
 const specialSpan = document.getElementById('special');
+let rotationCounter = 0;
 
 const quotes =[
   {
@@ -51,44 +52,56 @@ function math255() {
   return Math.floor(Math.random() * (255 + 1));
 }
 
+function htmlBuilder(randomQuote) {
+  let html = `
+  <p class="quote">${randomQuote.quote}</p>
+  <p class="source">${randomQuote.source}
+  `;
+  if (randomQuote.citation && randomQuote.year) {
+    html += `
+      <span class="citation">${randomQuote.citation}</span>
+      <span class="year">${randomQuote.year}</span>
+      </p>`;
+  } else if(!randomQuote.citation){
+    html += `
+    <span class="year"></span>
+    </p>`;
+  } else {
+    html += `
+      <span class="citation"></span>
+    </p>`;
+  }
+  //Easter egg
+  if (randomQuote.special){
+    specialSpan.innerHTML = `<img src="./images/christmas-tree.png" alt="XMAS tree">`;
+  } else {
+    specialSpan.innerHTML = '';
+  }
+  return html;
+}
 
 function printQuote() {
-
+  rotationCounter = 0;
   let randomQuote = getRandomQuote();
-  let html = `
-    <p class="quote">${randomQuote.quote}</p>
-    <p class="source">${randomQuote.source}
-    `;
-    if (randomQuote.citation && randomQuote.year) {
-      html += `
-        <span class="citation">${randomQuote.citation}</span>
-        <span class="year">${randomQuote.year}</span>
-        </p>`;
-    } else if(!randomQuote.citation){
-      html += `
-      <span class="year"></span>
-      </p>`;
-    } else {
-      html += `
-        <span class="citation"></span>
-      </p>`;
-    }
+  const html = htmlBuilder(randomQuote);
 
-    if (randomQuote.special){
-      specialSpan.innerHTML = `<img src="./images/christmas-tree.png" alt="XMAS tree">`;
-    } else {
-      specialSpan.innerHTML = ''
-    }
     document.getElementById('quote-box').innerHTML = html;
     //generates random background colors for body and button
     document.body.style.backgroundColor = `rgb(${math255()}, ${math255()}, ${math255()})`;
     quoteBox.style.backgroundColor = `rgb(${math255()}, ${math255()}, ${math255()})`;
 }
 
-//generates random on first page load
-printQuote();
-//resets quote every 10sec
-setInterval(() => printQuote(), 10000);
+setInterval(() => {
+  rotationCounter++;
+  console.log(rotationCounter);
+  //only auto change if the generate button hasnt been pressed in 10sec.
+  if (rotationCounter === 10){
+    printQuote();
+    rotationCounter = 0;
+  }
+}, 1000);
 
 quoteBox.addEventListener("click", printQuote, false);
 
+//generates random on first page load
+printQuote();
