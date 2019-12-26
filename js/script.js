@@ -48,8 +48,8 @@ function getRandomQuote() {
   return quotes[randomNum];
 }
 
-function math255() {
-  return Math.floor(Math.random() * (255 + 1));
+function math256() {
+  return Math.floor(Math.random() * 256);
 }
 
 function htmlBuilder(randomQuote) {
@@ -79,8 +79,8 @@ function printQuote() {
 
     document.getElementById('quote-box').innerHTML = html;
     //generates random background colors for body and button
-    document.body.style.backgroundColor = `rgb(${math255()}, ${math255()}, ${math255()})`;
-    quoteBox.style.backgroundColor = `rgb(${math255()}, ${math255()}, ${math255()})`;
+    document.body.style.backgroundColor = `rgb(${math256()}, ${math256()}, ${math256()})`;
+    quoteBox.style.backgroundColor = `rgb(${math256()}, ${math256()}, ${math256()})`;
 }
 
 setInterval(() => {
